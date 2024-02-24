@@ -8,7 +8,7 @@ import { api } from "@/trpc/server";
 export default async function Home() {
   noStore();
   const hello = await api.post.hello.query({ text: "from tRPC" });
-  const jason = await api.hello.jason.query({text:'Howare you?'});
+  // const jason = await api.hello.jason.query({text:'Howare you?'});
   const session = await getServerAuthSession();
 
   return (

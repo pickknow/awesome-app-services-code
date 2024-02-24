@@ -1,6 +1,5 @@
 "use client";
-
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { api } from "@/trpc/react";
 import type { RouterOutputs } from "@/trpc/shared";
@@ -8,26 +7,23 @@ import type { RouterOutputs } from "@/trpc/shared";
 type Awesome = RouterOutputs["awesome"]["show"];
 
 export default function AwesomeEditForm({ awesome }: { awesome: Awesome }) {
-
-  if (!awesome) return( <div>404</div>);
-  const router = useRouter();
-  const [title, setTitle] = useState(awesome.title);
-  const [cover, setCover] = useState(awesome.cover);
-  const [summary, setSummary] = useState(awesome.summary);
-  const [tags, setTags] = useState(awesome.tags);
-  const [content, setContent] = useState(awesome.content);
+  // const router = useRouter();
+  const [title, setTitle] = useState(awesome?.title?? '');
+  const [cover, setCover] = useState(awesome?.cover??  '');
+  const [summary, setSummary] = useState(awesome?.summary?? '');
+  const [tags, setTags] = useState(awesome?.tags?? '');
+  const [content, setContent] = useState(awesome?.content?? '');
 
   const editAwesome = api.awesome.edit.useMutation({
-    onSuccess: () => {
-      router.refresh();
-    }
+    onSuccess: () => {console.log('done') }
   })
   const errors = editAwesome.error?.data?.zodError?.fieldErrors
 
+  if (!awesome) return( <div>404</div>);
   return (
     <div className=" max-w-4xl mx-auto mt-10">
       {errors && Object.entries(errors).map(([k, v]) => {
-        return <pre>{k}:{v}</pre>
+        return <pre key={k}>{k}:{v}</pre>
       })}
       <form
         onSubmit={(e) => {
