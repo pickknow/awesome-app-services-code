@@ -61,7 +61,7 @@ export const awesomeRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      let data = {
+      const data = {
         title: input.title,
         url: makeTitleUrl(input.title),
         summary: input.summary,

@@ -23,7 +23,7 @@ export default function CreateAwesome() {
   return (
     <div className=" max-w-4xl mx-auto mt-10">
       {errors && Object.entries(errors).map(([k, v]) => {
-        return <pre>{k}:{v}</pre>
+        return <pre key={k}>{k}:{v}</pre>
       })}
       <form
         onSubmit={(e) => {
