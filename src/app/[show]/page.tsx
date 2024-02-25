@@ -17,7 +17,9 @@ export default async function HomeCate({
       <div className="text-center mt-10 text-xl">{article?.title}</div>
       <div className="mt-2 italic text-slate-400">{article?.summary}</div>
       <div className="mt-8">
+      <article className="prose lg:prose-xl">
         <Markdown>{article?.content}</Markdown>
+        </article>
       </div>
     </div>
   );
